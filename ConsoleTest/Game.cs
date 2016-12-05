@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace ConsoleTest
 {
@@ -18,33 +17,34 @@ namespace ConsoleTest
 
         public void DeckCreate()
         {
-            Dictionary<int, string> cards = new Dictionary<int, string>();
-            cards.Add(9, "J 10");
-            cards.Add(10, "Q 10");
-            cards.Add(11, "K 10");
-            cards.Add(12, "A 11");
+            var cards = new Dictionary<int, string>
+            {
+                {9, "J 10"},
+                {10, "Q 10"},
+                {11, "K 10"},
+                {12, "A 11"}
+            };
             var counter = 0;
             for (var i = 0; i < 4; i++)
             {
-                for(var j = 0; j < 13; j++)
+                for (var j = 0; j < 13; j++)
                 {
-                    foreach (var card in cards)
+                    string value;
+                    if (cards.TryGetValue(j, out value))
                     {
-                        if (j == card.Key)
-                        {
-                            string[] titleAndValues = card.Value.Split(' ');
-                            _deck[counter].Title = titleAndValues[0];
-                            _deck[counter].Value = Convert.ToInt32(titleAndValues[1]);
-                        }
-                        if (j != card.Key)
-                        {
-                            _deck[counter].Title = (j + 2).ToString();
-                            _deck[counter].Value = j + 2;
-                        }                      
-                    }               
+                        var titleAndValues = value.Split(' ');
+                        _deck[counter].Title = titleAndValues[0];
+                        _deck[counter].Value = Convert.ToInt32(titleAndValues[1]);
+                    }
+                    else
+                    {
+                        _deck[counter].Title = (j + 2).ToString();
+                        _deck[counter].Value = j + 2;
+                    }
                     _deck[counter].InGame = false;
-                    foreach (var color in Enum.GetValues(typeof(Colors)))
+                    for (var k = 0; k < Enum.GetValues(typeof (Colors)).Length; k++)
                     {
+                        var color = Enum.GetValues(typeof (Colors)).GetValue(k);
                         if (i == (int) color)
                         {
                             _deck[counter].Color = color.ToString();
@@ -57,8 +57,8 @@ namespace ConsoleTest
 
         public Card GetCard()
         {
-            Random r = new Random();
-            int cardnum = r.Next(0, 52);
+            var r = new Random();
+            var cardnum = r.Next(0, 52);
             while (_deck[cardnum].InGame)
             {
                 cardnum = r.Next(0, 52);
@@ -79,6 +79,7 @@ namespace ConsoleTest
         public void More(Player player)
         {
             player.Hand.Add(GetCard());
-        }                      
+        }
+        
     }
 }

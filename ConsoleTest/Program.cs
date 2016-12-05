@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 
 namespace ConsoleTest
 {
@@ -15,9 +14,8 @@ namespace ConsoleTest
                 var player = new Player();
                 g.GameStart(bank, player);
                 Console.WriteLine("Игра началась. Ваши карты:" + GetPlayerCards(player));
-                var ans = "";
                 Console.WriteLine("Взять еще карту? д/н");
-                ans = Console.ReadLine();
+                var ans = Console.ReadLine();
                 while (ans != "н")
                 {
                     g.More(player);
@@ -43,8 +41,9 @@ namespace ConsoleTest
         private static string GetPlayerCards(Player player)
         {
             var cards = "";
-            foreach (var c in player.Hand)
+            for (var i = 0; i < player.Hand.Count; i++)
             {
+                var c = player.Hand[i];
                 cards += c.Title + "-" + c.Color + " ";
             }
             return cards;
