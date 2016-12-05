@@ -1,0 +1,6 @@
+D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.exe.config
+D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.csprojResolveAssemblyReference.cache
+D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.exe
+D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.pdb
+D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.exe
+D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.pdb
