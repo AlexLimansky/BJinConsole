@@ -4,3 +4,9 @@ D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.exe
 D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.pdb
 D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.exe
 D:\Docs\Ses\S51\C#\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.pdb
+C:\Users\Zack\Documents\GitHub\BJinConsole\ConsoleTest\bin\Debug\ConsoleTest.exe.config
+C:\Users\Zack\Documents\GitHub\BJinConsole\ConsoleTest\obj\Debug\ConsoleTest.exe
+C:\Users\Zack\Documents\GitHub\BJinConsole\ConsoleTest\obj\Debug\ConsoleTest.pdb
+C:\Users\Zack\Documents\GitHub\BJinConsole\ConsoleTest\obj\Debug\ConsoleTest.csprojResolveAssemblyReference.cache
+C:\Users\Zack\Documents\GitHub\BJinConsole\ConsoleTest\bin\Debug\ConsoleTest.exe
+C:\Users\Zack\Documents\GitHub\BJinConsole\ConsoleTest\bin\Debug\ConsoleTest.pdb
