@@ -1,6 +1,6 @@
 ﻿namespace ConsoleTest
 {
-    public struct Card
+    public class Card
     {
         public string Title { get; set; }
         public string Color { get; set; }

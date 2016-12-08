@@ -5,63 +5,73 @@ namespace ConsoleTest
 {
     public class Game
     {
-        private readonly Card[] _deck = new Card[52];
+        private const int DeckAmount = 52;
+        private const int CardsInColor = 13;
+        private const int ColorsAmount = 4;
+        private const int MinCardNum = 2;
+        private readonly string[] _colors = {"S","H","C","D"};
 
-        private enum Colors
+        private readonly Card[] _deck = new Card[DeckAmount];
+
+        public Card CreateNumCard(int counter, int color)
         {
-            S = 0,
-            H = 1,
-            C = 2,
-            D = 3
+            var c = new Card
+            {
+                Title = (counter + MinCardNum).ToString(),
+                Color = "",
+                InGame = false,
+                Value = counter + MinCardNum
+            };
+            return c;
+        }
+
+        public Card CreatePicCard(int counter, int color, string dicValue)
+        {
+            var titleAndValues = dicValue.Split(' ');
+            var c = new Card
+            {
+                Title = titleAndValues[0],
+                Color = "",
+                InGame = false,
+                Value = Convert.ToInt32(titleAndValues[1])
+            };
+            return c;
+        }
+
+        public void CreateOneColorOfCards(Card[] deck, int color)
+        {
+            var cards = new Dictionary<int, string>
+            {
+                {CardsInColor-4, "J 10"},
+                {CardsInColor-3, "Q 10"},
+                {CardsInColor-2, "K 10"},
+                {CardsInColor-1, "A 11"}
+            };
+            for (var j = 0; j < CardsInColor; j++)
+            {
+                string value;
+                var newcard = cards.TryGetValue(j, out value) ? CreatePicCard(j, color, value)
+                 : CreateNumCard(j, color);
+                _deck[j + CardsInColor*color] = newcard;
+                _deck[j + CardsInColor * color].Color = _colors[color];
+            }
         }
 
         public void DeckCreate()
         {
-            var cards = new Dictionary<int, string>
+            for (var i = 0; i < ColorsAmount; i++)
             {
-                {9, "J 10"},
-                {10, "Q 10"},
-                {11, "K 10"},
-                {12, "A 11"}
-            };
-            var counter = 0;
-            for (var i = 0; i < 4; i++)
-            {
-                for (var j = 0; j < 13; j++)
-                {
-                    string value;
-                    if (cards.TryGetValue(j, out value))
-                    {
-                        var titleAndValues = value.Split(' ');
-                        _deck[counter].Title = titleAndValues[0];
-                        _deck[counter].Value = Convert.ToInt32(titleAndValues[1]);
-                    }
-                    else
-                    {
-                        _deck[counter].Title = (j + 2).ToString();
-                        _deck[counter].Value = j + 2;
-                    }
-                    _deck[counter].InGame = false;
-                    for (var k = 0; k < Enum.GetValues(typeof (Colors)).Length; k++)
-                    {
-                        var color = Enum.GetValues(typeof (Colors)).GetValue(k);
-                        if (i == (int) color)
-                        {
-                            _deck[counter].Color = color.ToString();
-                        }
-                    }
-                    counter++;
-                }
+                CreateOneColorOfCards(_deck, i);
             }
         }
 
         public Card GetCard()
         {
             var r = new Random();
-            var cardnum = r.Next(0, 52);
+            var cardnum = r.Next(0, DeckAmount);
             while (_deck[cardnum].InGame)
             {
-                cardnum = r.Next(0, 52);
+                cardnum = r.Next(0, DeckAmount);
             }
             _deck[cardnum].InGame = true;
             return _deck[cardnum];
