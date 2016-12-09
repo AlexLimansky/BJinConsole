@@ -9,8 +9,11 @@ namespace ConsoleTest
             var cont = true;
             while (cont)
             {
-                var game = new ConsoleGameSession();
-                game.Run();
+                var game = new Game();
+                var bank = new Player();
+                var player = new Player();
+                var gameSession = new GameSession(game, bank, player);
+                gameSession.Run();
                 Console.WriteLine("Для выхода нажмите Esc");
                 if (Console.ReadKey().Key == ConsoleKey.Escape)
                 {

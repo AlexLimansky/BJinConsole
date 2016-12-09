@@ -5,22 +5,18 @@ namespace ConsoleTest
 {
     public class Game
     {
-        private const int DeckAmount = 52;
-        private const int CardsInColor = 13;
-        private const int ColorsAmount = 4;
-        private const int MinCardNum = 2;
         private readonly string[] _colors = {"S","H","C","D"};
 
-        private readonly Card[] _deck = new Card[DeckAmount];
+        private readonly Card[] _deck = new Card[RulesAndSettings.CardsInColor() * RulesAndSettings.ColorsAmount()];
 
         public Card CreateNumCard(int counter, int color)
         {
             var c = new Card
             {
-                Title = (counter + MinCardNum).ToString(),
+                Title = (counter + RulesAndSettings.MinCardNum()).ToString(),
                 Color = "",
                 InGame = false,
-                Value = counter + MinCardNum
+                Value = counter + RulesAndSettings.MinCardNum()
             };
             return c;
         }
@@ -42,24 +38,24 @@ namespace ConsoleTest
         {
             var cards = new Dictionary<int, string>
             {
-                {CardsInColor-4, "J 10"},
-                {CardsInColor-3, "Q 10"},
-                {CardsInColor-2, "K 10"},
-                {CardsInColor-1, "A 11"}
+                {RulesAndSettings.CardsInColor() - 4, "J 10"},
+                {RulesAndSettings.CardsInColor() - 3 , "Q 10"},
+                {RulesAndSettings.CardsInColor() - 2, "K 10"},
+                {RulesAndSettings.CardsInColor() - 1, "A 11"}
             };
-            for (var j = 0; j < CardsInColor; j++)
+            for (var j = 0; j < RulesAndSettings.CardsInColor(); j++)
             {
                 string value;
                 var newcard = cards.TryGetValue(j, out value) ? CreatePicCard(j, color, value)
                  : CreateNumCard(j, color);
-                _deck[j + CardsInColor*color] = newcard;
-                _deck[j + CardsInColor * color].Color = _colors[color];
+                _deck[j + RulesAndSettings.CardsInColor() * color] = newcard;
+                _deck[j + RulesAndSettings.CardsInColor() * color].Color = _colors[color];
             }
         }
 
         public void DeckCreate()
         {
-            for (var i = 0; i < ColorsAmount; i++)
+            for (var i = 0; i < RulesAndSettings.ColorsAmount(); i++)
             {
                 CreateOneColorOfCards(_deck, i);
             }
@@ -68,10 +64,10 @@ namespace ConsoleTest
         public Card GetCard()
         {
             var r = new Random();
-            var cardnum = r.Next(0, DeckAmount);
+            var cardnum = r.Next(0, RulesAndSettings.CardsInColor() * RulesAndSettings.ColorsAmount());
             while (_deck[cardnum].InGame)
             {
-                cardnum = r.Next(0, DeckAmount);
+                cardnum = r.Next(0, RulesAndSettings.CardsInColor() * RulesAndSettings.ColorsAmount());
             }
             _deck[cardnum].InGame = true;
             return _deck[cardnum];
