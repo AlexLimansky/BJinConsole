@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleTest
+﻿namespace ConsoleTest
 {
     class GameSession
     {
@@ -10,13 +8,13 @@ namespace ConsoleTest
 
         public void Run()
         {
-            var consoleIO = new GameIO(this);
+            var consoleIO = new GameIO(Game, Bank, Player);
             Game.GameStart(Bank, Player);
             consoleIO.GameStart();
             consoleIO.LoopForMoreCards();               
             consoleIO.GetAScore();
         }
-        public string GetPlayerCards(Player player)
+        public static string GetPlayerCards(Player player)
         {
             var cards = "";
             for (var i = 0; i < player.Hand.Count; i++)
@@ -27,7 +25,7 @@ namespace ConsoleTest
             return cards;
         }
 
-        public int GetPlayerPoints(Player player)
+        public static int GetPlayerPoints(Player player)
         {
             var total = 0;
             var aceNum = 0;

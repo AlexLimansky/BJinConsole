@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleTest
 {
     class GameIO
     {
-        public GameSession Session { get; set; }
+        public Game Game { get; set; }
+        public Player Bank { get; set; }
+        public Player Player { get; set; }
 
         public void GameStart()
         {
-            Console.WriteLine("Игра началась. Ваши карты:" + Session.GetPlayerCards(Session.Player));
+            Console.WriteLine("Игра началась. Ваши карты:" + GameSession.GetPlayerCards(Player));
         }
 
         public void LoopForMoreCards()
@@ -21,8 +19,8 @@ namespace ConsoleTest
             var ans = Console.ReadLine();
             while (ans != "н")
             {
-                Session.Game.More(Session.Player);
-                Console.WriteLine("Ваши карты:" + Session.GetPlayerCards(Session.Player));
+                Game.More(Player);
+                Console.WriteLine("Ваши карты:" + GameSession.GetPlayerCards(Player));
                 Console.WriteLine("Взять еще карту? д/н");
                 ans = Console.ReadLine();
             }
@@ -30,18 +28,20 @@ namespace ConsoleTest
 
         public void GetAScore()
         {
-            Console.WriteLine("Ваши карты:" + Session.GetPlayerCards(Session.Player));
-            Console.WriteLine("Карты банка:" + Session.GetPlayerCards(Session.Bank));
-            Console.WriteLine("Ваши очки:" + Session.GetPlayerPoints(Session.Player));
-            Console.WriteLine("Очки банка:" + Session.GetPlayerPoints(Session.Bank));
-            Console.WriteLine(Session.GetPlayerPoints(Session.Player) > Session.GetPlayerPoints(Session.Bank) && Session.GetPlayerPoints(Session.Player) <= RulesAndSettings.ScoreToWin()
+            Console.WriteLine("Ваши карты:" + GameSession.GetPlayerCards(Player));
+            Console.WriteLine("Карты банка:" + GameSession.GetPlayerCards(Bank));
+            Console.WriteLine("Ваши очки:" + GameSession.GetPlayerPoints(Player));
+            Console.WriteLine("Очки банка:" + GameSession.GetPlayerPoints(Bank));
+            Console.WriteLine(GameSession.GetPlayerPoints(Player) > GameSession.GetPlayerPoints(Bank) && GameSession.GetPlayerPoints(Player) <= RulesAndSettings.ScoreToWin()
                 ? "Поздравляем, Вы выиграли"
                 : "Увы, Вы проиграли");
         }
 
-        public GameIO(GameSession session)
+        public GameIO(Game game, Player bank, Player player)
         {
-            Session = session;
+            Game = game;
+            Bank = bank;
+            Player = player;
         }
     }
 }
